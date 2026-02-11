@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/api";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
   const [loginCredentials, setLoginCredentials] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { refreshUser } = useAuth();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setLoginCredentials((prev) => ({ ...prev, [name]: value }));
-    console.log(loginCredentials);
   };
 
   const handleSubmit = async (event) => {
@@ -26,6 +27,7 @@ function Login() {
         setIsSubmitting(false);
         return;
       }
+      await refreshUser();
       navigate("/");
     } catch (err) {
       setError(err.message || "Login failed");
@@ -37,6 +39,8 @@ function Login() {
   return (
     <div>
       <h2>Login</h2>
+      {error && <p>{error}</p>}
+
       <form onSubmit={handleSubmit}>
         <input name="email" type="email" value={loginCredentials.email} onChange={handleChange} placeholder="email" />
         <input

@@ -26,3 +26,24 @@ export const login = async (loginData) => {
     return { errors: { error: "Network error. Please try again" } };
   }
 };
+
+export const getMe = async () => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    return { error: "No token" };
+  }
+
+  const response = await fetch(`${API_BASE}/auth/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    return { error: result.message || "Token invalid" };
+  }
+  return result;
+};
