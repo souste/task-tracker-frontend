@@ -7,7 +7,7 @@ import SignupPage from "./pages/SignupPage";
 function App() {
   return (
     <div>
-      <h1>Task Tracker</h1>;
+      <h1>Task Tracker</h1>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />

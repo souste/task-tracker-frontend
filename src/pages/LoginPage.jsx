@@ -1,5 +1,11 @@
+import Login from "../components/auth/Login";
+
 function LoginPage() {
-  return <h1>LoginPage Component</h1>;
+  return (
+    <div>
+      <Login />
+    </div>
+  );
 }
 
 export default LoginPage;
