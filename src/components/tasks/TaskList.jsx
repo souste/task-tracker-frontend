@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getTasks } from "../../services/api";
 
 function TaskList() {
@@ -47,12 +47,14 @@ function TaskList() {
   return (
     <>
       {tasks.map((task) => (
-        <div key={task.id}>
-          <p>{task.title}</p>
-          <p>{task.description}</p>
-          <p>{task.status}</p>
-          <p>{new Date(task.created_at).toLocaleString()}</p>
-        </div>
+        <Link key={task.id} to={`/tasks/${task.id}`}>
+          <div className="tasks-container">
+            <p>{task.title}</p>
+            <p>{task.description}</p>
+            <p>Status: {task.status}</p>
+            <p>{new Date(task.created_at).toLocaleString()}</p>
+          </div>
+        </Link>
       ))}
     </>
   );
