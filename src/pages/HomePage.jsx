@@ -1,4 +1,5 @@
 import { useAuth } from "../components/context/AuthContext";
+import TaskList from "../components/tasks/TaskList";
 
 function HomePage() {
   const { user, loading: authLoading, logout } = useAuth();
@@ -7,11 +8,11 @@ function HomePage() {
 
   return (
     <div>
-      <h1>HomePage Component</h1>
       {user ? (
         <div>
           <p>Logged in as: {user.email} </p>
           <button onClick={logout}>Logout</button>
+          <TaskList />
         </div>
       ) : (
         <p>Not logged in</p>

@@ -47,3 +47,25 @@ export const getMe = async () => {
   }
   return result;
 };
+
+export const getTasks = async () => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    return { error: "No token" };
+  }
+
+  const response = await fetch(`${API_BASE}/tasks`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    return { error: result.message || "Request failed" };
+  }
+  return result;
+};
