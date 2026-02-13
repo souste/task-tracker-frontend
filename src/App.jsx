@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import SingleTask from "./components/tasks/SingleTask";
+import Comments from "./components/comments/Comments";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/tasks/:taskId" element={<SingleTask />} />
+        <Route path="/tasks/:taskId/comments" element={<Comments />} />
       </Routes>
     </div>
   );

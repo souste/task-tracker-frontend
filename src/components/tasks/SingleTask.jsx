@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getTask } from "../../services/api";
 import { useParams } from "react-router-dom";
+import Comments from "../comments/Comments";
 
 function SingleTask() {
   const [task, setTask] = useState({});
@@ -20,7 +21,7 @@ function SingleTask() {
           setError(result.error);
           setTask({});
         } else {
-          setTask(result.data || []);
+          setTask(result.data || {});
         }
       } catch (err) {
         console.error("Failed to fetch task", err);
@@ -44,7 +45,7 @@ function SingleTask() {
         <p>{new Date(task.created_at).toLocaleString()}</p>
         <button>Edit</button>
         <button>Delete</button>
-        <p>Comments</p>
+        <Comments taskId={taskId} />
       </div>
     </>
   );
